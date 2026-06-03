@@ -34,7 +34,7 @@ public abstract class SmartCommand extends SmartCommandArgsContext implements Co
 		return commandName;
 	}
 
-	abstract void whenExecuted(CommandSender sender, String[] arguments);
+	abstract boolean whenExecuted(CommandSender sender, String[] arguments);
 	public SmartCommand(ToolsPlugin ToolsPlugin, String commandN, boolean isPlayerRequired, boolean isPermissionRequired, Permission commandPermission, Permission[] perms) {
 		this.playerRequired = isPermissionRequired;
 		this.permissionRequired = isPermissionRequired;
@@ -61,6 +61,7 @@ public abstract class SmartCommand extends SmartCommandArgsContext implements Co
 		if(permissionRequired && !hasPermission(sender, usePermission)) {
 			sender.sendMessage(ConfigManager.no_permission.getAsSendableMessage(plugin, new ConfigStringReplacement[] { new ConfigStringReplacement("%permission%", usePermission.toString()) } ));
 		}
-		return false;
+		
+		return whenExecuted(sender, args);
 	}
 }
