@@ -13,17 +13,25 @@ public enum ConfigManager {
 		this.entry = a;
 	}
 
-	public String getAsString(ToolsPlugin plugin) {
+	public String getAsString(ToolsPlugin plugin, ConfigStringReplacement[] str_to_replace) {
 		try {
-			return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString(entry));
+			String text = ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString(entry));
+
+			if(str_to_replace != null) {
+				for(int i=0; i < str_to_replace.length; i++) {
+					text.replace(str_to_replace[i].what(), str_to_replace[i].to());
+				}
+			}
+			
+			return text;
 		} catch (NullPointerException e) {
 			return "Invalid string (Auto-error)";
 		}
 	}
 
-	public String getAsSendableMessage(ToolsPlugin plugin) {
+	public String getAsSendableMessage(ToolsPlugin plugin, ConfigStringReplacement[] str_to_replace) {
 		try {
-			return ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString(entry).replace("%prefix%", ConfigManager.prefix.getAsString(plugin)));
+			return getAsString(plugin, str_to_replace).replace("%prefix%", ConfigManager.prefix.getAsString(plugin, str_to_replace));
 		} catch (NullPointerException e) {
 			return "Invalid string (Auto-error)";
 		}
