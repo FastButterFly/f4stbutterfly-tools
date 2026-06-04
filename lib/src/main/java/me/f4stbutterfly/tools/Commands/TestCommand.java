@@ -1,12 +1,16 @@
 package me.f4stbutterfly.tools.Commands;
 
+import java.util.List;
+
 import org.bukkit.command.CommandSender;
 import org.bukkit.permissions.Permission;
 
 import me.f4stbutterfly.tools.ToolsPlugin;
 import me.f4stbutterfly.tools.Commands.Core.SmartCommand;
 import me.f4stbutterfly.tools.Commands.Core.SmartCommandArgument;
+import me.f4stbutterfly.tools.Commands.Core.SmartCommandArgumentPassContext;
 import me.f4stbutterfly.tools.Commands.Core.SmartCommandArgumentType;
+import me.f4stbutterfly.tools.Parsers.DummyParser;
 
 public class TestCommand extends SmartCommand {
 
@@ -23,11 +27,17 @@ public class TestCommand extends SmartCommand {
 			 "f4stbutterfly-tools.testcmd.use"
 			);
 		this.commandArguments.add(new SmartCommandArgument("test", SmartCommandArgumentType.Required, false, 0));
+		this.commandArguments.add(new SmartCommandArgument("lista", SmartCommandArgumentType.Required, true, 1));
 	}
 
 	@Override
 	public boolean whenExecuted(CommandSender sender, String[] arguments) {
-		sender.sendMessage("coś tam");
+		String val = getRequiredArgumentAsType("test", new DummyParser(), arguments).value;
+		sender.sendMessage("coś tam: " + val);
+		List<SmartCommandArgumentPassContext<String>> l = getArgumentAsList("lista", new DummyParser(), arguments);
+		for(SmartCommandArgumentPassContext<String> a : l) {
+			sender.sendMessage("element: " + a.value);
+		}
 		return false;
 	}
 }

@@ -69,7 +69,7 @@ public abstract class SmartCommand extends SmartCommandArgsContext implements Co
 		}
 
 		for(SmartCommandArgument arg : commandArguments) {
-			if(arg.type() == SmartCommandArgumentType.Required && !is_e(arg.argIndex(), args)) {
+			if(arg.type() == SmartCommandArgumentType.Required && !isArgumentPresent(arg.argIndex(), args)) {
 				sender.sendMessage(getProperUsageString());
 				return false;
 			}

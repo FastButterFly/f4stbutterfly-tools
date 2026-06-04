@@ -3,12 +3,12 @@ package me.f4stbutterfly.tools.Commands.Core;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.f4stbutterfly.tools.IParser;
+import me.f4stbutterfly.tools.Parsers.IParser;
 
 public abstract class SmartCommandArgsContext {
 	protected final List<SmartCommandArgument> commandArguments = new ArrayList<>();
 	
-	public final boolean is_e(int arge, String[] args) {
+	public final boolean isArgumentPresent(int arge, String[] args) {
 		if(arge >= args.length) {
 			return false;
 		}
@@ -23,7 +23,7 @@ public abstract class SmartCommandArgsContext {
 
 		for(SmartCommandArgument arg : commandArguments) {
 			if(arg.argName() == argName) {
-				if(!is_e(arg.argIndex(), args)) {
+				if(!isArgumentPresent(arg.argIndex(), args)) {
 					invalid.Reason = "ARG_NOT_FOUND";
 					return invalid;
 				}
@@ -46,21 +46,48 @@ public abstract class SmartCommandArgsContext {
 		return invalid;
 	}
 
+	public final <T> List<SmartCommandArgumentPassContext<T>> getArgumentAsList(String argName, IParser<T> parser, String[] args) {
+		List<SmartCommandArgumentPassContext<T>> l = new ArrayList<>();
+		for(SmartCommandArgument arg : commandArguments) {
+			if(arg.argName() == argName) {
+				if(!isArgumentPresent(arg.argIndex(), args)) return l;
+				for (int i = arg.argIndex(); i<args.length; i++) {
+					try {
+						T val = parser.parse(args[i]);
+						SmartCommandArgumentPassContext<T> r = new SmartCommandArgumentPassContext<>();
+						r.isValid = true;
+						r.Reason = "";
+						r.value = val;
+						l.add(r);
+					} catch(Exception e) {
+						SmartCommandArgumentPassContext<T> a = new SmartCommandArgumentPassContext<>();
+						a.isValid = false;
+						a.Reason = "ARG_PARSE_FAILED";
+						a.value = null;
+						l.add(a);
+					}
+				}
+			}
+		}
+
+		return l;
+	}
+
 	public final String getArgsMsgForHelp() {
 		StringBuilder build = new StringBuilder();
 
 		commandArguments.forEach((arg) -> {
 			if(arg.type() == SmartCommandArgumentType.Required) {
 				if(arg.isList()) {
-					build.append("<{ " + arg.argName() + " }> ");
+					build.append("<{" + arg.argName() + "}> ");
 				} else {
-					build.append("< " + arg.argName() + " > ");
+					build.append("<" + arg.argName() + "> ");
 				}
 			} else {
 				if(arg.isList()) {
-					build.append("[{ " + arg.argName() + " }] ");
+					build.append("[{" + arg.argName() + "}] ");
 				} else {
-					build.append("[ " + arg.argName() + " ] ");
+					build.append("[" + arg.argName() + "] ");
 				}
 			}
 		});
