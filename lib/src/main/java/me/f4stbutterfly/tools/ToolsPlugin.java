@@ -6,6 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import me.f4stbutterfly.tools.Commands.TestCommand;
 import me.f4stbutterfly.tools.Commands.Core.SmartCommand;
+import me.f4stbutterfly.tools.Commands.TabAutocomplete.SmartCommandTabAutocomplete;
 
 public class ToolsPlugin extends JavaPlugin {
 
@@ -23,6 +24,7 @@ public class ToolsPlugin extends JavaPlugin {
 			});
 
 			getCommand(commands[i].getCommandName()).setExecutor(commands[i]);
+			getCommand(commands[i].getCommandName()).setTabCompleter(new SmartCommandTabAutocomplete(commands[i]));
 		}
 	}
 
