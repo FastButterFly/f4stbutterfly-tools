@@ -12,6 +12,7 @@ import org.bukkit.permissions.Permission;
 import me.f4stbutterfly.tools.ConfigManager;
 import me.f4stbutterfly.tools.ConfigStringReplacement;
 import me.f4stbutterfly.tools.ToolsPlugin;
+import me.f4stbutterfly.tools.Commands.TabAutocomplete.SmartCommandTabAutocomplete;
 
 public abstract class SmartCommand extends SmartCommandArgsContext implements CommandExecutor {
 
@@ -56,6 +57,8 @@ public abstract class SmartCommand extends SmartCommandArgsContext implements Co
 				permissions.add(perms[i]);
 			}
 		}
+
+		this.plugin.getCommand(this.commandName).setTabCompleter(new SmartCommandTabAutocomplete(this));
 	}
 
 	@Override

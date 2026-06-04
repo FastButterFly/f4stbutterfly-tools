@@ -6,7 +6,7 @@ import java.util.List;
 import me.f4stbutterfly.tools.Parsers.IParser;
 
 public abstract class SmartCommandArgsContext {
-	protected final List<SmartCommandArgument> commandArguments = new ArrayList<>();
+	public final List<SmartCommandArgument> commandArguments = new ArrayList<>();
 	
 	public final boolean isArgumentPresent(int arge, String[] args) {
 		if(arge >= args.length) {

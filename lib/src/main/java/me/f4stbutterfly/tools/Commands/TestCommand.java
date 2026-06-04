@@ -26,8 +26,8 @@ public class TestCommand extends SmartCommand {
 			 new Permission[] { COMMAND_USE_PERMISSION },
 			 "f4stbutterfly-tools.testcmd.use"
 			);
-		this.commandArguments.add(new SmartCommandArgument("test", SmartCommandArgumentType.Required, false, 0));
-		this.commandArguments.add(new SmartCommandArgument("lista", SmartCommandArgumentType.Required, true, 1));
+		this.commandArguments.add(new SmartCommandArgument("test", SmartCommandArgumentType.Required, false, 0, null));
+		this.commandArguments.add(new SmartCommandArgument("lista", SmartCommandArgumentType.Required, true, 1, null));
 	}
 
 	@Override
