@@ -26,6 +26,10 @@ public abstract class SmartCommand extends SmartCommandArgsContext implements Co
 		return sender.isOp() || sender.hasPermission(ToolsPlugin.GOD_PERMISSION) || sender.hasPermission(perm);
 	}
 
+	private final String getNoPermissionMessage(Permission perm) {
+		return ConfigManager.no_permission.getAsSendableMessage(plugin, new ConfigStringReplacement[] { new ConfigStringReplacement("%permission%", perm.toString()) } );
+	}
+
 	public final List<Permission> getRegisteredPermissions() {
 		return permissions;
 	}
@@ -34,9 +38,9 @@ public abstract class SmartCommand extends SmartCommandArgsContext implements Co
 		return commandName;
 	}
 
-	abstract boolean whenExecuted(CommandSender sender, String[] arguments);
+	abstract public boolean whenExecuted(CommandSender sender, String[] arguments);
 	public SmartCommand(ToolsPlugin ToolsPlugin, String commandN, boolean isPlayerRequired, boolean isPermissionRequired, Permission commandPermission, Permission[] perms) {
-		this.playerRequired = isPermissionRequired;
+		this.playerRequired = isPlayerRequired;
 		this.permissionRequired = isPermissionRequired;
 		this.usePermission = commandPermission;
 		this.plugin = ToolsPlugin;
@@ -50,16 +54,11 @@ public abstract class SmartCommand extends SmartCommandArgsContext implements Co
 
 	@Override
 	public final boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		if(playerRequired) { 
-			Player p = (Player)sender;
-			if(p == null) {
-				sender.sendMessage(ConfigManager.player_only.getAsSendableMessage(plugin, null));
-				return false;
-			}
-		}
+		if(this.playerRequired && !(sender instanceof Player)) { sender.sendMessage(ConfigManager.player_only.getAsSendableMessage(plugin, null)); return false;  }
+		
 
-		if(permissionRequired && !hasPermission(sender, usePermission)) {
-			sender.sendMessage(ConfigManager.no_permission.getAsSendableMessage(plugin, new ConfigStringReplacement[] { new ConfigStringReplacement("%permission%", usePermission.toString()) } ));
+		if(this.permissionRequired && !hasPermission(sender, usePermission)) {
+			sender.sendMessage(getNoPermissionMessage(usePermission));
 		}
 		
 		return whenExecuted(sender, args);

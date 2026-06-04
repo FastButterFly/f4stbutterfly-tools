@@ -1,0 +1,4 @@
+message:
+  prefix: '&7[ &e&lPREFIX &7]&f'
+  no_permission: "%prefix% &cYou don't have required permission to do that! &7( &c%permission% &7)"
+  command_only_for_players: 'This command can only be used by player!'
