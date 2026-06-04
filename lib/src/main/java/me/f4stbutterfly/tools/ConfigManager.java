@@ -5,7 +5,8 @@ import org.bukkit.ChatColor;
 public enum ConfigManager {
 	no_permission("message.no_permission"),
 	player_only("message.command_only_for_players"),
-	prefix("message.prefix");
+	prefix("message.prefix"),
+	proper_usage("message.proper_usage");
 
 	private final String entry;
 
@@ -19,7 +20,7 @@ public enum ConfigManager {
 
 			if(str_to_replace != null) {
 				for(int i=0; i < str_to_replace.length; i++) {
-					text.replace(str_to_replace[i].what(), str_to_replace[i].to());
+					text = text.replace(str_to_replace[i].what(), str_to_replace[i].to());
 				}
 			}
 			

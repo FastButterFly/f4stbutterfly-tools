@@ -8,15 +8,22 @@ import me.f4stbutterfly.tools.IParser;
 public abstract class SmartCommandArgsContext {
 	protected final List<SmartCommandArgument> commandArguments = new ArrayList<>();
 	
-	public final <T> SmartCommandArgumentPassContext<T> getRequiredArgumentAsType(String argName, IParser<T> parser, String[] args) {
+	public final boolean is_e(int arge, String[] args) {
+		if(arge >= args.length) {
+			return false;
+		}
 
+		return true;
+	}
+
+	public final <T> SmartCommandArgumentPassContext<T> getRequiredArgumentAsType(String argName, IParser<T> parser, String[] args) {
 		SmartCommandArgumentPassContext<T> invalid = new SmartCommandArgumentPassContext<>();
 		invalid.value = null;
 		invalid.isValid = false;
 
 		for(SmartCommandArgument arg : commandArguments) {
 			if(arg.argName() == argName) {
-				if(arg.argIndex() >= args.length) {
+				if(!is_e(arg.argIndex(), args)) {
 					invalid.Reason = "ARG_NOT_FOUND";
 					return invalid;
 				}
@@ -36,7 +43,6 @@ public abstract class SmartCommandArgsContext {
 		}
 
 		invalid.Reason = "ARG_NOT_FOUND";
-
 		return invalid;
 	}
 

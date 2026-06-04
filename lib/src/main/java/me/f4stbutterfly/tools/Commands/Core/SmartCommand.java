@@ -20,14 +20,19 @@ public abstract class SmartCommand extends SmartCommandArgsContext implements Co
 	private final boolean permissionRequired;
 	private final Permission usePermission;
 	private final ToolsPlugin plugin;
-	private final List<Permission> permissions = new ArrayList<>();
+	protected final List<Permission> permissions = new ArrayList<>();
+	protected final String usePermissionAsString;
 
 	private final boolean hasPermission(CommandSender sender, Permission perm) {
 		return sender.isOp() || sender.hasPermission(ToolsPlugin.GOD_PERMISSION) || sender.hasPermission(perm);
 	}
 
-	private final String getNoPermissionMessage(Permission perm) {
-		return ConfigManager.no_permission.getAsSendableMessage(plugin, new ConfigStringReplacement[] { new ConfigStringReplacement("%permission%", perm.toString()) } );
+	private final String getNoPermissionMessage(String perm) {
+		return ConfigManager.no_permission.getAsSendableMessage(plugin, new ConfigStringReplacement[] { new ConfigStringReplacement("%permission%", perm) } );
+	}
+
+	private final String getProperUsageString() {
+		return ConfigManager.proper_usage.getAsSendableMessage(plugin, new ConfigStringReplacement[] { new ConfigStringReplacement("%command%", this.commandName), new ConfigStringReplacement("%args%", getArgsMsgForHelp()) } );
 	}
 
 	public final List<Permission> getRegisteredPermissions() {
@@ -39,12 +44,13 @@ public abstract class SmartCommand extends SmartCommandArgsContext implements Co
 	}
 
 	abstract public boolean whenExecuted(CommandSender sender, String[] arguments);
-	public SmartCommand(ToolsPlugin ToolsPlugin, String commandN, boolean isPlayerRequired, boolean isPermissionRequired, Permission commandPermission, Permission[] perms) {
+	public SmartCommand(ToolsPlugin ToolsPlugin, String commandN, boolean isPlayerRequired, boolean isPermissionRequired, Permission commandPermission, Permission[] perms, String usePermissionAsString) {
 		this.playerRequired = isPlayerRequired;
 		this.permissionRequired = isPermissionRequired;
 		this.usePermission = commandPermission;
 		this.plugin = ToolsPlugin;
 		this.commandName = commandN;
+		this.usePermissionAsString = usePermissionAsString;
 		if(perms != null) {
 			for (int i=0; i < perms.length; i++) {
 				permissions.add(perms[i]);
@@ -58,7 +64,15 @@ public abstract class SmartCommand extends SmartCommandArgsContext implements Co
 		
 
 		if(this.permissionRequired && !hasPermission(sender, usePermission)) {
-			sender.sendMessage(getNoPermissionMessage(usePermission));
+			sender.sendMessage(getNoPermissionMessage(usePermissionAsString));
+			return false;
+		}
+
+		for(SmartCommandArgument arg : commandArguments) {
+			if(arg.type() == SmartCommandArgumentType.Required && !is_e(arg.argIndex(), args)) {
+				sender.sendMessage(getProperUsageString());
+				return false;
+			}
 		}
 		
 		return whenExecuted(sender, args);
