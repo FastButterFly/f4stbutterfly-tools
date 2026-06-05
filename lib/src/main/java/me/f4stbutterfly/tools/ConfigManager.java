@@ -6,7 +6,8 @@ public enum ConfigManager {
 	no_permission("message.no_permission"),
 	player_only("message.command_only_for_players"),
 	prefix("message.prefix"),
-	proper_usage("message.proper_usage");
+	proper_usage("message.proper_usage"),
+	invalid_player("message.invalid_player");
 
 	private final String entry;
 

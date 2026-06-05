@@ -14,6 +14,8 @@ public class ToolsPlugin extends JavaPlugin {
 	public static final Permission GOD_PERMISSION = new Permission("f4stbutterfly-tools.*");
 	public final SmartCommand[] commands = new SmartCommand[] { new TestCommand(this) };
 
+	public static final String VERSION = "1.0";
+
 	@Override
 	public void onEnable() {
 		saveDefaultConfig();
@@ -26,6 +28,10 @@ public class ToolsPlugin extends JavaPlugin {
 
 			getCommand(commands[i].getCommandName()).setExecutor(commands[i]);
 			getCommand(commands[i].getCommandName()).setTabCompleter(new SmartCommandTabAutocomplete(commands[i]));
+			HTTPUpdater upd = new HTTPUpdater();
+			if(upd.isUpdateNeeded()) {
+				getLogger().info("There is new version of the plugin available!");
+			}
 		}
 
 		int pID = 31801;
