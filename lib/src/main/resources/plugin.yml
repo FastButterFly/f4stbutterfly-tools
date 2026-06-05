@@ -5,3 +5,5 @@ main: 'me.f4stbutterfly.tools.ToolsPlugin'
 api-version: '1.16'
 commands:
   test:
+  gamemode:
+    aliases: [ egamemode, gm, egm ]

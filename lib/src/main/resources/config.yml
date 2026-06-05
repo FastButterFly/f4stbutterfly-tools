@@ -4,3 +4,6 @@ message:
   command_only_for_players: 'This command can only be used by player!'
   proper_usage: '%prefix% &cProper usage: /%command% %args%'
   invalid_player: '%prefix% &cInvalid player provided!'
+  invalid_gamemode: '%prefix% &cInvalid gamemode provided!'
+  commands:
+    gamemode: "%prefix% &aYou changed &e&l%target%'s &agame mode to: &e&l%gamemode%"

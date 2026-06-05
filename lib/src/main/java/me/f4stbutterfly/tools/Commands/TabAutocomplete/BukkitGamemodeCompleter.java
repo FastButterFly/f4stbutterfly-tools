@@ -8,7 +8,7 @@ public final class BukkitGamemodeCompleter implements SmartCommandArgTabComplete
 	private static final BukkitGamemodeCompleter instance = new BukkitGamemodeCompleter();
 	public final List<String> gamemodes = new ArrayList<>();
 
-	public final BukkitGamemodeCompleter getInstance() {
+	public static final BukkitGamemodeCompleter getInstance() {
 		return instance;
 	}
 

@@ -7,7 +7,9 @@ public enum ConfigManager {
 	player_only("message.command_only_for_players"),
 	prefix("message.prefix"),
 	proper_usage("message.proper_usage"),
-	invalid_player("message.invalid_player");
+	invalid_player("message.invalid_player"),
+	invalid_gamemode("message.invalid_gamemode"),
+	command_gamemode_change("message.commands.gamemode");
 
 	private final String entry;
 

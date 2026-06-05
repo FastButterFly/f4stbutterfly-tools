@@ -43,8 +43,8 @@ public abstract class SmartCommandSimpleCmd extends SmartCommand {
 
 		targets.forEach((target) -> {
 			if(target != null) {
-				perTarget(sender, target);
-				sender.sendMessage(perTargetMessage(sender, target));
+				perTarget(sender, target, arguments);
+				sender.sendMessage(perTargetMessage(sender, target, arguments));
 			} else {
 				sender.sendMessage(ConfigManager.invalid_player.getAsSendableMessage(plg, null));
 			}
@@ -53,6 +53,6 @@ public abstract class SmartCommandSimpleCmd extends SmartCommand {
 		return false;
 	}
 
-	abstract void perTarget(CommandSender sender, Player target);
-	abstract String perTargetMessage(CommandSender sender, Player target);
+	abstract protected void perTarget(CommandSender sender, Player target, String[] args);
+	abstract protected String perTargetMessage(CommandSender sender, Player target, String[] args);
 }
