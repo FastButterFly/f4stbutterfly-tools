@@ -12,7 +12,7 @@
  *
  * Violations will result in a ban of your plugin and account from bStats.
  */
-package me.f4stbutterfly.tools.bstats;
+package org.bstats.bukkit;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
