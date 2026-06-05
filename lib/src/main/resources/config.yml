@@ -12,3 +12,6 @@ message:
     feed: "%prefix% &aYou fed &e&l%target%"
     fly: "%prefix% &aYou changed &e&l%target%'s &afly mode to: &e&l%mode%"
     kill: "%prefix% &aKilled &e&l%target%"
+    helpop:
+      sent: "%prefix% &c&l[HELPOP] &eMessage sent"
+      recived: "%prefix% &c&l[HELPOP] &e%sender% &asent: %message%"

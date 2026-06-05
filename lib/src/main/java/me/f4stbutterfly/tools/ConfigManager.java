@@ -14,7 +14,9 @@ public enum ConfigManager {
 	command_heal_change("message.commands.heal"),
 	command_feed_fed("message.commands.feed"),
 	command_fly_change("message.commands.fly"),
-	command_kill_killed("message.commands.kill");
+	command_kill_killed("message.commands.kill"),
+	command_helpop_sent("message.commands.helpop.sent"),
+	command_helpop_recived("message.commands.helpop.recived");
 
 	private final String entry;
 
