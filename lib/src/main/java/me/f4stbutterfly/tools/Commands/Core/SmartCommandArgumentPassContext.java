@@ -11,10 +11,10 @@ public class SmartCommandArgumentPassContext<T> {
 	}
 
 	public boolean isFailReason_ArgNotProvided() {
-		return Reason == "ARG_NOT_FOUND";
+		return Reason.equalsIgnoreCase("ARG_NOT_FOUND");
 	}
 
 	public boolean isFailReason_ParseFail() {
-		return Reason == "ARG_PARSE_FAILED";
+		return Reason.equalsIgnoreCase("ARG_PARSE_FAILED");
 	}
 }
