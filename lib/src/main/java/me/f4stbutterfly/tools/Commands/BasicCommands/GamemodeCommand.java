@@ -1,4 +1,4 @@
-package me.f4stbutterfly.tools.Commands;
+package me.f4stbutterfly.tools.Commands.BasicCommands;
 
 import org.bukkit.GameMode;
 import org.bukkit.command.CommandSender;

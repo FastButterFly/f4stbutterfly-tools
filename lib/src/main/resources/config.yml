@@ -7,3 +7,8 @@ message:
   invalid_gamemode: '%prefix% &cInvalid gamemode provided!'
   commands:
     gamemode: "%prefix% &aYou changed &e&l%target%'s &agame mode to: &e&l%gamemode%"
+    god: "%prefix% &aYou changed &e&l%target%'s &agod mode to: &e&l%mode%"
+    heal: "%prefix% &aYou healed &e&l%target%"
+    feed: "%prefix% &aYou fed &e&l%target%"
+    fly: "%prefix% &aYou changed &e&l%target%'s &afly mode to: &e&l%mode%"
+    kill: "%prefix% &aKilled &e&l%target%"

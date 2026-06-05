@@ -9,7 +9,12 @@ public enum ConfigManager {
 	proper_usage("message.proper_usage"),
 	invalid_player("message.invalid_player"),
 	invalid_gamemode("message.invalid_gamemode"),
-	command_gamemode_change("message.commands.gamemode");
+	command_gamemode_change("message.commands.gamemode"),
+	command_god_change("message.commands.god"),
+	command_heal_change("message.commands.heal"),
+	command_feed_fed("message.commands.feed"),
+	command_fly_change("message.commands.fly"),
+	command_kill_killed("message.commands.kill");
 
 	private final String entry;
 

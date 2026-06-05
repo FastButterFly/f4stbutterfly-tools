@@ -4,6 +4,15 @@ author: 'f4stbutterfly'
 main: 'me.f4stbutterfly.tools.ToolsPlugin'
 api-version: '1.16'
 commands:
-  test:
   gamemode:
     aliases: [ egamemode, gm, egm ]
+  fly:
+    aliases: [ efly ]
+  god:
+    aliases: [ egod ]
+  heal:
+    aliases: [ eheal ]
+  feed:
+    aliases: [ efeed ]
+  kill:
+    aliases: [ ekill ]
