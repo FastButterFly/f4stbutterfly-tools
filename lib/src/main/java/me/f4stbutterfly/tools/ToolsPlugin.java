@@ -1,5 +1,6 @@
 package me.f4stbutterfly.tools;
 
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.permissions.Permission;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -15,7 +16,6 @@ import me.f4stbutterfly.tools.Commands.BasicCommands.InvseeCommand;
 import me.f4stbutterfly.tools.Commands.BasicCommands.KillCommand;
 import me.f4stbutterfly.tools.Commands.Core.SmartCommand;
 import me.f4stbutterfly.tools.Commands.TabAutocomplete.SmartCommandTabAutocomplete;
-import me.f4stbutterfly.tools.bstats.Metrics;
 
 public class ToolsPlugin extends JavaPlugin {
 
