@@ -4,11 +4,13 @@ import org.bukkit.Bukkit;
 import org.bukkit.permissions.Permission;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import me.f4stbutterfly.tools.Commands.BasicCommands.EnderchestCommand;
 import me.f4stbutterfly.tools.Commands.BasicCommands.FeedCommand;
 import me.f4stbutterfly.tools.Commands.BasicCommands.FlyCommand;
 import me.f4stbutterfly.tools.Commands.BasicCommands.GamemodeCommand;
 import me.f4stbutterfly.tools.Commands.BasicCommands.GodCommand;
 import me.f4stbutterfly.tools.Commands.BasicCommands.HealCommand;
+import me.f4stbutterfly.tools.Commands.BasicCommands.InvseeCommand;
 import me.f4stbutterfly.tools.Commands.BasicCommands.KillCommand;
 import me.f4stbutterfly.tools.Commands.Core.SmartCommand;
 import me.f4stbutterfly.tools.Commands.TabAutocomplete.SmartCommandTabAutocomplete;
@@ -23,7 +25,9 @@ public class ToolsPlugin extends JavaPlugin {
 		new GodCommand(this), 
 		new FlyCommand(this), 
 		new FeedCommand(this),
-		new KillCommand(this) };
+		new KillCommand(this),
+		new EnderchestCommand(this),
+		new InvseeCommand(this) };
 
 	public static final String VERSION = "1.0";
 

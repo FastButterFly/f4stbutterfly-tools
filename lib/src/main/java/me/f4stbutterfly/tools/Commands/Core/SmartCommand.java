@@ -16,22 +16,22 @@ import me.f4stbutterfly.tools.ToolsPlugin;
 public abstract class SmartCommand extends SmartCommandArgsContext implements CommandExecutor {
 
 	private final String commandName;
-	private final boolean playerRequired;
+	protected boolean playerRequired;
 	private final boolean permissionRequired;
 	private final Permission usePermission;
 	private final ToolsPlugin plugin;
 	protected final List<Permission> permissions = new ArrayList<>();
 	protected final String usePermissionAsString;
 
-	private final boolean hasPermission(CommandSender sender, Permission perm) {
+	protected final boolean hasPermission(CommandSender sender, Permission perm) {
 		return sender.isOp() || sender.hasPermission(ToolsPlugin.GOD_PERMISSION) || sender.hasPermission(perm);
 	}
 
-	private final String getNoPermissionMessage(String perm) {
+	protected final String getNoPermissionMessage(String perm) {
 		return ConfigManager.no_permission.getAsSendableMessage(plugin, new ConfigStringReplacement[] { new ConfigStringReplacement("%permission%", perm) } );
 	}
 
-	private final String getProperUsageString() {
+	protected final String getProperUsageString() {
 		return ConfigManager.proper_usage.getAsSendableMessage(plugin, new ConfigStringReplacement[] { new ConfigStringReplacement("%command%", this.commandName), new ConfigStringReplacement("%args%", getArgsMsgForHelp()) } );
 	}
 

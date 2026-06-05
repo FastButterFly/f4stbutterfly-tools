@@ -44,7 +44,9 @@ public abstract class SmartCommandSimpleCmd extends SmartCommand {
 		targets.forEach((target) -> {
 			if(target != null) {
 				perTarget(sender, target, arguments);
-				sender.sendMessage(perTargetMessage(sender, target, arguments));
+				if(perTargetMessage(sender, target, arguments) != null) {
+					sender.sendMessage(perTargetMessage(sender, target, arguments));
+				}
 			} else {
 				sender.sendMessage(ConfigManager.invalid_player.getAsSendableMessage(plg, null));
 			}

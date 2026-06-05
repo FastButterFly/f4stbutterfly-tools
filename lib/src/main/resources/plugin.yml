@@ -16,3 +16,7 @@ commands:
     aliases: [ efeed ]
   kill:
     aliases: [ ekill ]
+  enderchest:
+    aliases: [ eenderchest, ec, eec ]
+  invsee:
+    aliases: [ einvsee ]

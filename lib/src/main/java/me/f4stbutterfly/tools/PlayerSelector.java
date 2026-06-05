@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 public final class PlayerSelector {
 	public static final List<Player> playersFromString(String selector) {
 		List<Player> a = new ArrayList<>();
-		if(selector == "*") {
+		if(selector.equalsIgnoreCase("*")) {
 			Bukkit.getOnlinePlayers().forEach((plr) -> {
 				a.add(plr);
 			});
