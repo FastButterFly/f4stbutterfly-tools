@@ -1,5 +1,7 @@
 package me.f4stbutterfly.tools;
 
+import java.util.logging.Level;
+
 import org.bukkit.Bukkit;
 import org.bukkit.permissions.Permission;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -20,6 +22,7 @@ import me.f4stbutterfly.tools.Commands.BasicCommands.KillCommand;
 import me.f4stbutterfly.tools.Commands.BasicCommands.RepairCommand;
 import me.f4stbutterfly.tools.Commands.Core.SmartCommand;
 import me.f4stbutterfly.tools.Commands.TabAutocomplete.SmartCommandTabAutocomplete;
+import me.f4stbutterfly.tools.Events.BukkitEventListener;
 
 public class ToolsPlugin extends JavaPlugin {
 
@@ -43,9 +46,29 @@ public class ToolsPlugin extends JavaPlugin {
 
 	@Override
 	public void onEnable() {
+
+		if(!Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
+			getLogger().log(Level.SEVERE, "PlaceholderAPI is required to run this plugin!");
+			Bukkit.getPluginManager().disablePlugin(this);
+		}
+
+		BukkitEventListener.instance.plugin = this;
+		Bukkit.getPluginManager().registerEvents(BukkitEventListener.instance, this);
+
+		int pID = 31801;
+		@SuppressWarnings("unused")
+		Metrics m = new Metrics(this, pID);		
+
 		saveDefaultConfig();
 		reloadConfig();
+
+		HTTPUpdater upd = new HTTPUpdater();
+		if(upd.isUpdateNeeded()) {
+			getLogger().info("There is new version of the plugin available!");
+		}
+
 		Bukkit.getPluginManager().addPermission(GOD_PERMISSION);
+
 		for (int i = 0; i < commands.length; i++) {
 			commands[i].getRegisteredPermissions().forEach((e) -> {
 				Bukkit.getPluginManager().addPermission(e);
@@ -53,15 +76,8 @@ public class ToolsPlugin extends JavaPlugin {
 
 			getCommand(commands[i].getCommandName()).setExecutor(commands[i]);
 			getCommand(commands[i].getCommandName()).setTabCompleter(new SmartCommandTabAutocomplete(commands[i]));
-			HTTPUpdater upd = new HTTPUpdater();
-			if(upd.isUpdateNeeded()) {
-				getLogger().info("There is new version of the plugin available!");
-			}
-		}
 
-		int pID = 31801;
-		@SuppressWarnings("unused")
-		Metrics m = new Metrics(this, pID);
+		}
 	}
 
 	@Override

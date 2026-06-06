@@ -1,6 +1,9 @@
 package me.f4stbutterfly.tools;
 
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
+
+import me.clip.placeholderapi.PlaceholderAPI;
 
 public enum ConfigManager {
 	no_permission("message.no_permission"),
@@ -23,7 +26,9 @@ public enum ConfigManager {
 	invalid_enchantment("message.invalid_enchantment"),
 	command_enchant_enchanted("message.commands.enchant"),
 	command_repair_rep("message.commands.repaired"),
-	command_clear_cleared("message.commands.clear");
+	command_clear_cleared("message.commands.clear"),
+	player_join("message.player_joined"),
+	player_left("message.player_quit");
 
 	private final String entry;
 
@@ -40,9 +45,10 @@ public enum ConfigManager {
 					text = text.replace(str_to_replace[i].what(), str_to_replace[i].to());
 				}
 			}
-			
+
 			return text;
 		} catch (Exception e) {
+			e.printStackTrace();
 			return "Invalid string (Auto-error)";
 		}
 	}
@@ -51,8 +57,15 @@ public enum ConfigManager {
 		try {
 			return getAsString(plugin, str_to_replace).replace("%prefix%", ConfigManager.prefix.getAsString(plugin, str_to_replace));
 		} catch (Exception e) {
+			e.printStackTrace();
 			return "Invalid string (Auto-error)";
 		}
+	}
+
+	public String getAsSendableWithPlaceholders(ToolsPlugin plugin, ConfigStringReplacement[] str_to_replace, Player plr) {
+		String str = getAsSendableMessage(plugin, str_to_replace);
+		str = PlaceholderAPI.setBracketPlaceholders(plr, str);
+		return str;
 	}
 
 	public int getAsInt(ToolsPlugin plugin) {

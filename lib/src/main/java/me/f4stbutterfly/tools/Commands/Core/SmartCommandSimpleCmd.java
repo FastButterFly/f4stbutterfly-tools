@@ -23,7 +23,7 @@ public abstract class SmartCommandSimpleCmd extends SmartCommand {
 			false,
 			true,
 			new Permission("f4stbutterfly-tools._.use".replace("_", name)),
-			new Permission[] { new Permission("f4stbutterfly-tools._.use".replace("_", name)) },
+			new Permission[] { new Permission("f4stbutterfly-tools._.use".replace("_", name)), new Permission("f4stbutterfly-tools._.others".replace("_", name)) },
 			"f4stbutterfly-tools._.use".replace("_", name));
 		
 		this.commandArguments.add(new SmartCommandArgument("target", SmartCommandArgumentType.Optional, false, 0, new BukkitPlayerCompleter()));
@@ -41,16 +41,32 @@ public abstract class SmartCommandSimpleCmd extends SmartCommand {
 			targets = PlayerSelector.playersFromString(playerSelector.value);
 		}
 
-		targets.forEach((target) -> {
+		for (Player target : targets) {
 			if(target != null) {
-				perTarget(sender, target, arguments);
-				if(perTargetMessage(sender, target, arguments) != null) {
-					sender.sendMessage(perTargetMessage(sender, target, arguments));
+				if(sender instanceof Player) {
+					if(targets.size() > 1 || targets.get(0) != (Player)sender) {
+						if(hasPermission(sender, this.permissions.get(1))) {
+							perTarget(sender, target, arguments);
+							if(perTargetMessage(sender, target, arguments) != null) {
+								sender.sendMessage(perTargetMessage(sender, target, arguments));
+							}
+						} else {
+							sender.sendMessage(getNoPermissionMessage("f4stbutterfly-tools._.others".replace("_", this.getCommandName())));
+							break;
+						}
+					}
+				} else {
+					perTarget(sender, target, arguments);
+					if(perTargetMessage(sender, target, arguments) != null) {
+						sender.sendMessage(perTargetMessage(sender, target, arguments));
+					}
 				}
+				
+
 			} else {
 				sender.sendMessage(ConfigManager.invalid_player.getAsSendableMessage(plg, null));
 			}
-		});
+		}
 
 		return false;
 	}

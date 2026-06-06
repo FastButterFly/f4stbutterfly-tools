@@ -3,6 +3,7 @@ version: '1.0'
 author: 'f4stbutterfly'
 main: 'me.f4stbutterfly.tools.ToolsPlugin'
 api-version: '1.16'
+depend: ["PlaceholderAPI"]
 commands:
   gamemode:
     aliases: [ egamemode, gm, egm ]
