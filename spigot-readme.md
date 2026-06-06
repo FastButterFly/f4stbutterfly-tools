@@ -2,6 +2,8 @@
 
 Fairly basic plugin providing following functionality
 
+Requires PlaceholderAPI to work
+
 - Basic
 - - Change join and quit messages
 - Admin commands:
