@@ -7,14 +7,18 @@ message:
   invalid_gamemode: '%prefix% &cInvalid gamemode provided!'
   invalid_material: '%prefix% &cInvalid material provided!'
   invalid_nan: '%prefix% &cProvided value is not a number!'
+  invalid_enchantment: '%prefix% &cInvalid enchantment provided!'
   commands:
-    gamemode: "%prefix% &aYou changed &e&l%target%'s &agame mode to: &e&l%gamemode%"
-    god: "%prefix% &aYou changed &e&l%target%'s &agod mode to: &e&l%mode%"
+    gamemode: "%prefix% &aYou changed &e&l%target% &agame mode to: &e&l%gamemode%"
+    god: "%prefix% &aYou changed &e&l%target% &agod mode to: &e&l%mode%"
     heal: "%prefix% &aYou healed &e&l%target%"
     feed: "%prefix% &aYou fed &e&l%target%"
-    fly: "%prefix% &aYou changed &e&l%target%'s &afly mode to: &e&l%mode%"
+    fly: "%prefix% &aYou changed &e&l%target% &afly mode to: &e&l%mode%"
     kill: "%prefix% &aKilled &e&l%target%"
     helpop:
       sent: "%prefix% &c&l[HELPOP] &aMessage sent"
       recived: "%prefix% &c&l[HELPOP] &e%sender% &asent: %message%"
     give: '%prefix% &aYou gave &e&l%target% &ea &8&l( &ex%amount% &8&l)&e %item%'
+    enchant: '%prefix% &aYou enchanted item held in main hand by &e&l%target% &awith &8&l( &ex%level% &8&l)&e %enchantment%'
+    repaired: '%prefix &aItem in your hand was repaired'
+    clear: '%prefix% &aYou clear &e&l%target% &ainventory'

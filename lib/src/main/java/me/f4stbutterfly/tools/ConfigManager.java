@@ -19,7 +19,11 @@ public enum ConfigManager {
 	command_helpop_recived("message.commands.helpop.recived"),
 	invalid_material("message.invalid_material"),
 	command_give_gave("message.commands.give"),
-	invalid_nan("message.invalid_nan");
+	invalid_nan("message.invalid_nan"),
+	invalid_enchantment("message.invalid_enchantment"),
+	command_enchant_enchanted("message.commands.enchant"),
+	command_repair_rep("message.commands.repaired"),
+	command_clear_cleared("message.commands.clear");
 
 	private final String entry;
 

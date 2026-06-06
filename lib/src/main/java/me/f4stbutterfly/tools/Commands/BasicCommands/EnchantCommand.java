@@ -1,0 +1,85 @@
+package me.f4stbutterfly.tools.Commands.BasicCommands;
+
+import org.bukkit.Material;
+import org.bukkit.command.CommandSender;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+
+import me.f4stbutterfly.tools.ConfigManager;
+import me.f4stbutterfly.tools.ConfigStringReplacement;
+import me.f4stbutterfly.tools.ToolsPlugin;
+import me.f4stbutterfly.tools.Commands.Core.SmartCommandArgument;
+import me.f4stbutterfly.tools.Commands.Core.SmartCommandArgumentPassContext;
+import me.f4stbutterfly.tools.Commands.Core.SmartCommandArgumentType;
+import me.f4stbutterfly.tools.Commands.Core.SmartCommandSimpleCmd;
+import me.f4stbutterfly.tools.Commands.TabAutocomplete.BukkitEnchantmentCompleter;
+import me.f4stbutterfly.tools.Commands.TabAutocomplete.BukkitPlayerCompleter;
+import me.f4stbutterfly.tools.Commands.TabAutocomplete.IntegerCompleter;
+import me.f4stbutterfly.tools.Parsers.BukkitEnchantmentParser;
+import me.f4stbutterfly.tools.Parsers.DummyParser;
+
+public class EnchantCommand extends SmartCommandSimpleCmd {
+
+	private final ToolsPlugin plg;
+
+	public EnchantCommand(ToolsPlugin p) {
+		super(p, "enchant");
+		this.plg = p;
+		this.playerRequired = true;
+		this.commandArguments.clear();
+
+		this.commandArguments.add(new SmartCommandArgument("target", SmartCommandArgumentType.Required, false, 0, new BukkitPlayerCompleter()));
+		this.commandArguments.add(new SmartCommandArgument("enchantment", SmartCommandArgumentType.Required, false, 1, BukkitEnchantmentCompleter.getInstance()));
+		this.commandArguments.add(new SmartCommandArgument("level", SmartCommandArgumentType.Optional, false, 2, new IntegerCompleter()));
+	}
+
+	private Integer getAmmountToGive(String[] args) {
+		SmartCommandArgumentPassContext<String> raw = getRequiredArgumentAsType("level", new DummyParser(), args);
+		if(raw.isValid()) {
+			try {
+				return Integer.valueOf(raw.value);
+			} catch (Exception e) {
+				return null;
+			}
+		} else {
+			return 1;
+		}
+	}
+
+	private Enchantment getMaterialToGive(String[] args) {
+		SmartCommandArgumentPassContext<Enchantment> raw = getRequiredArgumentAsType("enchantment", new BukkitEnchantmentParser(), args);
+		if(raw.isValid) {
+			return raw.value;
+		} else {
+			return null;
+		}
+	}
+
+	@Override
+	protected void perTarget(CommandSender sender, Player target, String[] args) {
+		Enchantment mat = getMaterialToGive(args);
+		Integer amount = getAmmountToGive(args);
+
+		if(amount == null) {
+			sender.sendMessage(ConfigManager.invalid_nan.getAsSendableMessage(plg, null));
+			return;
+		}
+
+		if(mat == null) {
+			sender.sendMessage(ConfigManager.invalid_enchantment.getAsSendableMessage(plg, null));
+			return;
+		}
+
+		ItemStack stack = target.getInventory().getItemInMainHand();
+		if(stack != null && stack.getType() != Material.AIR) {
+			stack.addUnsafeEnchantment(mat, amount);
+		}
+	}
+
+	@Override
+	protected String perTargetMessage(CommandSender sender, Player target, String[] args) {
+		if(getAmmountToGive(args) == null || getMaterialToGive(args) == null) return null;
+		return ConfigManager.command_enchant_enchanted.getAsSendableMessage(plg, new ConfigStringReplacement[] { new ConfigStringReplacement("%target%", target.getName()), new ConfigStringReplacement("%level%", getAmmountToGive(args).toString()), new ConfigStringReplacement("%enchantment%", getMaterialToGive(args).getKey().getKey()) });
+	}
+}

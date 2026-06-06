@@ -23,3 +23,9 @@ commands:
   helpop:
   give:
     aliases: [ egive, itm, eitm, item, eitem ]
+  enchant:
+    aliases: [ eenchant, ench, eench]
+  repair:
+    aliases: [ erepair ]
+  clear:
+    aliases: [ eclear ]

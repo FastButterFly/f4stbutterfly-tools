@@ -15,7 +15,7 @@ public final class HTTPUpdater {
 				.build();
 			
 			HttpResponse<String> res = client.send(r, HttpResponse.BodyHandlers.ofString());
-			return res.body() == ToolsPlugin.VERSION;
+			return !ToolsPlugin.VERSION.equalsIgnoreCase(res.body());
 		} catch (Exception e) {
 			return false;
 		}
