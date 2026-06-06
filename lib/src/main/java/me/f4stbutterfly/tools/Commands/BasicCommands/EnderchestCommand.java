@@ -14,12 +14,12 @@ import me.f4stbutterfly.tools.Commands.Core.SmartCommandSimpleCmd;
 //import me.f4stbutterfly.tools.Parsers.DummyParser;
 
 public final class EnderchestCommand extends SmartCommandSimpleCmd {
-	private final Permission USE_OTHERS_PERMISSION = new Permission("f4stbutterfly-tools.enderchest.others");
+	//private final Permission USE_OTHERS_PERMISSION = new Permission("f4stbutterfly-tools.enderchest.others");
 
 	public EnderchestCommand(ToolsPlugin plugin) {
 		super(plugin, "enderchest");
 		this.playerRequired = true;
-		this.permissions.add(USE_OTHERS_PERMISSION);
+		//this.permissions.add(USE_OTHERS_PERMISSION);
 	}
 
 	@Override
