@@ -1,17 +1,17 @@
 package me.f4stbutterfly.tools.Commands.BasicCommands;
 
-import java.util.ArrayList;
-import java.util.List;
+//import java.util.ArrayList;
+//import java.util.List;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.Permission;
 
-import me.f4stbutterfly.tools.PlayerSelector;
+//import me.f4stbutterfly.tools.PlayerSelector;
 import me.f4stbutterfly.tools.ToolsPlugin;
-import me.f4stbutterfly.tools.Commands.Core.SmartCommandArgumentPassContext;
+//import me.f4stbutterfly.tools.Commands.Core.SmartCommandArgumentPassContext;
 import me.f4stbutterfly.tools.Commands.Core.SmartCommandSimpleCmd;
-import me.f4stbutterfly.tools.Parsers.DummyParser;
+//import me.f4stbutterfly.tools.Parsers.DummyParser;
 
 public final class EnderchestCommand extends SmartCommandSimpleCmd {
 	private final Permission USE_OTHERS_PERMISSION = new Permission("f4stbutterfly-tools.enderchest.others");
@@ -24,7 +24,7 @@ public final class EnderchestCommand extends SmartCommandSimpleCmd {
 
 	@Override
 	protected void perTarget(CommandSender sender, Player target, String[] args) {
-		SmartCommandArgumentPassContext<String> playerSelector = getRequiredArgumentAsType("target", new DummyParser(), args);
+		/* SmartCommandArgumentPassContext<String> playerSelector = getRequiredArgumentAsType("target", new DummyParser(), args);
 		List<Player> targets = new ArrayList<>();
 
 		if(!playerSelector.isValid) {
@@ -41,7 +41,10 @@ public final class EnderchestCommand extends SmartCommandSimpleCmd {
 			}
 		} else {
 			plr.openInventory(target.getEnderChest());
-		}
+		} */
+
+		Player plr = (Player)sender;
+		plr.openInventory(target.getInventory());
 	}
 
 	@Override
