@@ -22,9 +22,9 @@ public abstract class SmartCommandSimpleCmd extends SmartCommand {
 			name,
 			false,
 			true,
-			new Permission("f4stbutterfly._.use".replace("_", name)),
-			new Permission[] { new Permission("f4stbutterfly._.use".replace("_", name)) },
-			"f4stbutterfly._.use".replace("_", name));
+			new Permission("f4stbutterfly-tools._.use".replace("_", name)),
+			new Permission[] { new Permission("f4stbutterfly-tools._.use".replace("_", name)) },
+			"f4stbutterfly-tools._.use".replace("_", name));
 		
 		this.commandArguments.add(new SmartCommandArgument("target", SmartCommandArgumentType.Optional, false, 0, new BukkitPlayerCompleter()));
 		this.plg = plg;

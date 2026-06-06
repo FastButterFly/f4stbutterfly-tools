@@ -16,7 +16,10 @@ public enum ConfigManager {
 	command_fly_change("message.commands.fly"),
 	command_kill_killed("message.commands.kill"),
 	command_helpop_sent("message.commands.helpop.sent"),
-	command_helpop_recived("message.commands.helpop.recived");
+	command_helpop_recived("message.commands.helpop.recived"),
+	invalid_material("message.invalid_material"),
+	command_give_gave("message.commands.give"),
+	invalid_nan("message.invalid_nan");
 
 	private final String entry;
 
@@ -35,7 +38,7 @@ public enum ConfigManager {
 			}
 			
 			return text;
-		} catch (NullPointerException e) {
+		} catch (Exception e) {
 			return "Invalid string (Auto-error)";
 		}
 	}
@@ -43,7 +46,7 @@ public enum ConfigManager {
 	public String getAsSendableMessage(ToolsPlugin plugin, ConfigStringReplacement[] str_to_replace) {
 		try {
 			return getAsString(plugin, str_to_replace).replace("%prefix%", ConfigManager.prefix.getAsString(plugin, str_to_replace));
-		} catch (NullPointerException e) {
+		} catch (Exception e) {
 			return "Invalid string (Auto-error)";
 		}
 	}
@@ -51,7 +54,7 @@ public enum ConfigManager {
 	public int getAsInt(ToolsPlugin plugin) {
 		try {
 			return plugin.getConfig().getInt(entry);
-		} catch (NullPointerException e) {
+		} catch (Exception e) {
 			return -9900002;
 		}
 	}
@@ -59,7 +62,7 @@ public enum ConfigManager {
 	public double getAsDouble(ToolsPlugin plugin) {
 		try {
 			return plugin.getConfig().getDouble(entry);
-		} catch (NullPointerException e) {
+		} catch (Exception e) {
 			return -9900002;
 		}
 	}
@@ -67,7 +70,7 @@ public enum ConfigManager {
 	public boolean getAsBoolean(ToolsPlugin plugin) {
 		try {
 			return plugin.getConfig().getBoolean(entry);
-		} catch (NullPointerException e) {
+		} catch (Exception e) {
 			return false;
 		}
 	}

@@ -1,14 +1,15 @@
 package me.f4stbutterfly.tools;
 
-import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.permissions.Permission;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import me.f4stbutterfly.bstats.Metrics;
 import me.f4stbutterfly.tools.Commands.BasicCommands.EnderchestCommand;
 import me.f4stbutterfly.tools.Commands.BasicCommands.FeedCommand;
 import me.f4stbutterfly.tools.Commands.BasicCommands.FlyCommand;
 import me.f4stbutterfly.tools.Commands.BasicCommands.GamemodeCommand;
+import me.f4stbutterfly.tools.Commands.BasicCommands.GiveCommand;
 import me.f4stbutterfly.tools.Commands.BasicCommands.GodCommand;
 import me.f4stbutterfly.tools.Commands.BasicCommands.HealCommand;
 import me.f4stbutterfly.tools.Commands.BasicCommands.HelpopCommand;
@@ -29,7 +30,8 @@ public class ToolsPlugin extends JavaPlugin {
 		new KillCommand(this),
 		new EnderchestCommand(this),
 		new InvseeCommand(this),
-		new HelpopCommand(this) };
+		new HelpopCommand(this),
+		new GiveCommand(this) };
 
 	public static final String VERSION = "1.0";
 
@@ -53,7 +55,7 @@ public class ToolsPlugin extends JavaPlugin {
 
 		int pID = 31801;
 		@SuppressWarnings("unused")
-		Metrics metrics = new Metrics(this, pID);
+		Metrics m = new Metrics(this, pID);
 	}
 
 	@Override

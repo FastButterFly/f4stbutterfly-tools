@@ -21,3 +21,5 @@ commands:
   invsee:
     aliases: [ einvsee ]
   helpop:
+  give:
+    aliases: [ egive, itm, eitm, item, eitem ]

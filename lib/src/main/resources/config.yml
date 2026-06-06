@@ -5,6 +5,8 @@ message:
   proper_usage: '%prefix% &cProper usage: /%command% %args%'
   invalid_player: '%prefix% &cInvalid player provided!'
   invalid_gamemode: '%prefix% &cInvalid gamemode provided!'
+  invalid_material: '%prefix% &cInvalid material provided!'
+  invalid_nan: '%prefix% &cProvided value is not a number!'
   commands:
     gamemode: "%prefix% &aYou changed &e&l%target%'s &agame mode to: &e&l%gamemode%"
     god: "%prefix% &aYou changed &e&l%target%'s &agod mode to: &e&l%mode%"
@@ -13,5 +15,6 @@ message:
     fly: "%prefix% &aYou changed &e&l%target%'s &afly mode to: &e&l%mode%"
     kill: "%prefix% &aKilled &e&l%target%"
     helpop:
-      sent: "%prefix% &c&l[HELPOP] &eMessage sent"
+      sent: "%prefix% &c&l[HELPOP] &aMessage sent"
       recived: "%prefix% &c&l[HELPOP] &e%sender% &asent: %message%"
+    give: '%prefix% &aYou gave &e&l%target% &ea &8&l( &ex%amount% &8&l)&e %item%'
