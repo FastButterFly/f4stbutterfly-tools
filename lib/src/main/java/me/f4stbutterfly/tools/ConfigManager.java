@@ -28,7 +28,10 @@ public enum ConfigManager {
 	command_repair_rep("message.commands.repaired"),
 	command_clear_cleared("message.commands.clear"),
 	player_join("message.player_joined"),
-	player_left("message.player_quit");
+	player_left("message.player_quit"),
+	invalid_kit("message.invalid_kit"),
+	command_kit_get("message.commands.kit.recived"),
+	command_kit_cooldown("message.commands.kit.on_cooldown");
 
 	private final String entry;
 

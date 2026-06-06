@@ -30,3 +30,5 @@ commands:
     aliases: [ erepair ]
   clear:
     aliases: [ eclear ]
+  kit:
+    aliases: [ ekit ]

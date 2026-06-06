@@ -12,12 +12,13 @@ import org.bukkit.permissions.Permission;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import me.f4stbutterfly.tools.ToolsPlugin;
+import me.f4stbutterfly.tools.Kits.Exception.PlayerNoKitPermissionException;
 import me.f4stbutterfly.tools.Kits.Exception.PlayerOnKitCooldownException;
 import me.f4stbutterfly.tools.Parsers.BukkitEnchantmentParser;
 
 public final class KitManager {
 
-	private static final Permission BYPASS_PERMISSION = new Permission("f4stbutterfly-tools.bypass_kit_cooldown");
+	private static final Permission BYPASS_PERMISSION = new Permission("f4stbutterfly-tools.kit.bypass_cooldown");
 
 	private record kEntry(UUID usedBy, Kit kit, BukkitRunnable task) {}
 
@@ -38,6 +39,8 @@ public final class KitManager {
 	public KitManager(ToolsPlugin plg) {
 		this.configFile = new KitConfigFile(plg);
 		this.plugin = plg;
+
+		Bukkit.getPluginManager().addPermission(BYPASS_PERMISSION);
 	}
 
 	public void loadKits() {
@@ -57,9 +60,9 @@ public final class KitManager {
 	}
 
 	public Kit getKitByName(String kit) throws Exception {
-		for (Kit array : (Kit[])kits.toArray()) {
-			if(array.kitName == kit) {
-				return array;
+		for(Kit k : kits) {
+			if(k.kitName.equals(kit)) {
+				return k;
 			}
 		}
 
@@ -68,8 +71,12 @@ public final class KitManager {
 
 	public void giveKitToPlayer(Player player, String kitName) throws Exception {
 		Kit kit = getKitByName(kitName);
-		for (kEntry e : (kEntry[])entr.toArray()) {
-			if(e.usedBy() == player.getUniqueId() && e.kit() == kit) throw new PlayerOnKitCooldownException();
+		for (kEntry e : entr) {
+			if(e.usedBy() == player.getUniqueId() && e.kit().kitName.equals(kitName)) throw new PlayerOnKitCooldownException();
+		}
+
+		if(!plugin.hasPermission(player, kit.kitPermission)) {
+			throw new PlayerNoKitPermissionException();
 		}
 
 		kit.getItems().forEach((item) -> {
@@ -102,7 +109,7 @@ public final class KitManager {
 			ConfigurationSection currentItemSection = itemSection.getConfigurationSection(key);
 
 			Material itemMat = Material.valueOf(key.toUpperCase());
-			int amount = currentItemSection.getInt("ammount");
+			int amount = currentItemSection.getInt("amount");
 			String dname = currentItemSection.getString("dname");
 
 			List<KitItemEnchEntry> enchs = new ArrayList<>();
@@ -110,7 +117,7 @@ public final class KitManager {
 			ConfigurationSection enchantmentSection = currentItemSection.getConfigurationSection("enchantments");
 			if(enchantmentSection != null) {
 				for (String ekey : enchantmentSection.getKeys(false)) {
-					enchs.add(new KitItemEnchEntry(new BukkitEnchantmentParser().parse(ekey), enchantmentSection.getInt(key)));
+					enchs.add(new KitItemEnchEntry(new BukkitEnchantmentParser().parse(ekey), enchantmentSection.getInt(ekey)));
 				}
 			}
 

@@ -18,7 +18,7 @@ public final class Kit {
 		this.kitName = name;
 		this.cooldownInTicks = cooldownInSec * 20;
 		this.items = itms;
-		this.kitPermission = new Permission("f4stbutterfly-tools.kit." + this.kitName);
+		this.kitPermission = new Permission("f4stbutterfly-tools.kits." + this.kitName);
 	}
 
 	public final List<ItemStack> getItems() {

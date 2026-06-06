@@ -20,9 +20,11 @@ import me.f4stbutterfly.tools.Commands.BasicCommands.HealCommand;
 import me.f4stbutterfly.tools.Commands.BasicCommands.HelpopCommand;
 import me.f4stbutterfly.tools.Commands.BasicCommands.InvseeCommand;
 import me.f4stbutterfly.tools.Commands.BasicCommands.KillCommand;
+import me.f4stbutterfly.tools.Commands.BasicCommands.KitCommand;
 import me.f4stbutterfly.tools.Commands.BasicCommands.RepairCommand;
 import me.f4stbutterfly.tools.Commands.Core.SmartCommand;
 import me.f4stbutterfly.tools.Commands.TabAutocomplete.SmartCommandTabAutocomplete;
+import me.f4stbutterfly.tools.Commands.TabAutocomplete.ToolsKitCompleter;
 import me.f4stbutterfly.tools.Events.BukkitEventListener;
 import me.f4stbutterfly.tools.Kits.KitManager;
 
@@ -42,7 +44,8 @@ public class ToolsPlugin extends JavaPlugin implements IPermission {
 		new GiveCommand(this),
 		new EnchantCommand(this),
 		new RepairCommand(this),
-		new ClearCommand(this) };
+		new ClearCommand(this),
+		new KitCommand(this) };
 
 	public static final String VERSION = "1.1";
 
@@ -77,6 +80,7 @@ public class ToolsPlugin extends JavaPlugin implements IPermission {
 		Bukkit.getPluginManager().addPermission(GOD_PERMISSION);
 
 		kitManager.loadKits();
+		ToolsKitCompleter.instance.build(this);
 
 		for (int i = 0; i < commands.length; i++) {
 			commands[i].getRegisteredPermissions().forEach((e) -> {
