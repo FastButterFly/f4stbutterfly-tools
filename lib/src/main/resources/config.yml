@@ -20,5 +20,5 @@ message:
       recived: "%prefix% &c&l[HELPOP] &e%sender% &asent: %message%"
     give: '%prefix% &aYou gave &e&l%target% &ea &8&l( &ex%amount% &8&l)&e %item%'
     enchant: '%prefix% &aYou enchanted item held in main hand by &e&l%target% &awith &8&l( &ex%level% &8&l)&e %enchantment%'
-    repaired: '%prefix &aItem in your hand was repaired'
+    repaired: '%prefix% &aItem in your hand was repaired'
     clear: '%prefix% &aYou clear &e&l%target% &ainventory'
