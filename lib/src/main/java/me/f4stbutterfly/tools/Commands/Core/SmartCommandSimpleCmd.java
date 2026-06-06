@@ -52,7 +52,11 @@ public abstract class SmartCommandSimpleCmd extends SmartCommand {
 							}
 						} else {
 							sender.sendMessage(getNoPermissionMessage("f4stbutterfly-tools._.others".replace("_", this.getCommandName())));
-							break;
+						}
+					} else {
+						perTarget(sender, target, arguments);
+						if(perTargetMessage(sender, target, arguments) != null) {
+							sender.sendMessage(perTargetMessage(sender, target, arguments));
 						}
 					}
 				} else {
@@ -61,8 +65,6 @@ public abstract class SmartCommandSimpleCmd extends SmartCommand {
 						sender.sendMessage(perTargetMessage(sender, target, arguments));
 					}
 				}
-				
-
 			} else {
 				sender.sendMessage(ConfigManager.invalid_player.getAsSendableMessage(plg, null));
 			}
