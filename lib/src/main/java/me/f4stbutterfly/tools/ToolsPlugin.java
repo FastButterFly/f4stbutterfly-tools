@@ -23,9 +23,10 @@ import me.f4stbutterfly.tools.Commands.BasicCommands.RepairCommand;
 import me.f4stbutterfly.tools.Commands.Core.SmartCommand;
 import me.f4stbutterfly.tools.Commands.TabAutocomplete.SmartCommandTabAutocomplete;
 import me.f4stbutterfly.tools.Events.BukkitEventListener;
+import me.f4stbutterfly.tools.Kits.KitManager;
 
 public class ToolsPlugin extends JavaPlugin {
-
+	public final KitManager kitManager = new KitManager(this);
 	public static final Permission GOD_PERMISSION = new Permission("f4stbutterfly-tools.*");
 	public final SmartCommand[] commands = new SmartCommand[] { 
 		new GamemodeCommand(this), 
@@ -42,7 +43,7 @@ public class ToolsPlugin extends JavaPlugin {
 		new RepairCommand(this),
 		new ClearCommand(this) };
 
-	public static final String VERSION = "1.0";
+	public static final String VERSION = "1.1";
 
 	@Override
 	public void onEnable() {
@@ -68,6 +69,8 @@ public class ToolsPlugin extends JavaPlugin {
 		}
 
 		Bukkit.getPluginManager().addPermission(GOD_PERMISSION);
+
+		kitManager.loadKits();
 
 		for (int i = 0; i < commands.length; i++) {
 			commands[i].getRegisteredPermissions().forEach((e) -> {

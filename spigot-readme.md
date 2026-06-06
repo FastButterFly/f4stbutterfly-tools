@@ -1,3 +1,5 @@
+Fairly basic plugin providing core functionality
+
 **F4stbutterfly-tools**
 
 Fairly basic plugin providing following functionality

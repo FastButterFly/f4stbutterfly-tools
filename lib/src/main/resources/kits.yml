@@ -1,0 +1,19 @@
+# Each kit are structured like that
+# kit name:
+#   cooldown: cooldown in seconds
+#   items: List of items in kit
+# Each item are structured like that
+# item material:
+#   amount: amount of item
+#   dname: display name (Optional)
+#   enchantments: list of item enchantments. (Each entry are structured as enchantment: level )
+
+kits:
+  default:
+    cooldown: 5
+    items:
+      stone:
+        amount: 1
+        dname: "random"
+        enchantments:
+          protection: 10
