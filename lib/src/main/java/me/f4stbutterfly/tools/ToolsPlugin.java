@@ -3,6 +3,7 @@ package me.f4stbutterfly.tools;
 import java.util.logging.Level;
 
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
 import org.bukkit.permissions.Permission;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -25,7 +26,7 @@ import me.f4stbutterfly.tools.Commands.TabAutocomplete.SmartCommandTabAutocomple
 import me.f4stbutterfly.tools.Events.BukkitEventListener;
 import me.f4stbutterfly.tools.Kits.KitManager;
 
-public class ToolsPlugin extends JavaPlugin {
+public class ToolsPlugin extends JavaPlugin implements IPermission {
 	public final KitManager kitManager = new KitManager(this);
 	public static final Permission GOD_PERMISSION = new Permission("f4stbutterfly-tools.*");
 	public final SmartCommand[] commands = new SmartCommand[] { 
@@ -44,6 +45,11 @@ public class ToolsPlugin extends JavaPlugin {
 		new ClearCommand(this) };
 
 	public static final String VERSION = "1.1";
+
+	@Override
+	public boolean hasPermission(CommandSender sender, Permission perm) {
+		return sender.isOp() || sender.hasPermission(ToolsPlugin.GOD_PERMISSION) || sender.hasPermission(perm);
+	}
 
 	@Override
 	public void onEnable() {

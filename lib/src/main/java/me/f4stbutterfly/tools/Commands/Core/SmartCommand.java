@@ -24,7 +24,7 @@ public abstract class SmartCommand extends SmartCommandArgsContext implements Co
 	protected final String usePermissionAsString;
 
 	protected final boolean hasPermission(CommandSender sender, Permission perm) {
-		return sender.isOp() || sender.hasPermission(ToolsPlugin.GOD_PERMISSION) || sender.hasPermission(perm);
+		return this.plugin.hasPermission(sender, perm);
 	}
 
 	protected final String getNoPermissionMessage(String perm) {

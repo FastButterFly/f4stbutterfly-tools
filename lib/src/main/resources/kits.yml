@@ -14,6 +14,6 @@ kits:
     items:
       stone:
         amount: 1
-        dname: "random"
+        dname: "&eRandom"
         enchantments:
           protection: 10

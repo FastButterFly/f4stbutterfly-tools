@@ -2,17 +2,37 @@ package me.f4stbutterfly.tools.Kits;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.entity.Player;
+import org.bukkit.permissions.Permission;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import me.f4stbutterfly.tools.ToolsPlugin;
+import me.f4stbutterfly.tools.Kits.Exception.PlayerOnKitCooldownException;
 import me.f4stbutterfly.tools.Parsers.BukkitEnchantmentParser;
 
 public final class KitManager {
+
+	private static final Permission BYPASS_PERMISSION = new Permission("f4stbutterfly-tools.bypass_kit_cooldown");
+
+	private record kEntry(UUID usedBy, Kit kit, BukkitRunnable task) {}
+
+	private class iTask extends BukkitRunnable {
+		public kEntry entry;
+		@Override
+		public void run() {
+			entr.remove(entry);
+		}
+	}
+
 	private final KitConfigFile configFile;
 
 	public final List<Kit> kits = new ArrayList<>();
+	private final List<kEntry> entr = new ArrayList<>();
 	private final ToolsPlugin plugin;
 
 	public KitManager(ToolsPlugin plg) {
@@ -30,6 +50,43 @@ public final class KitManager {
 				e.printStackTrace();
 			}
 		}
+
+		kits.forEach((kit) -> {
+			Bukkit.getPluginManager().addPermission(kit.kitPermission);
+		});
+	}
+
+	public Kit getKitByName(String kit) throws Exception {
+		for (Kit array : (Kit[])kits.toArray()) {
+			if(array.kitName == kit) {
+				return array;
+			}
+		}
+
+		throw new Exception();
+	}
+
+	public void giveKitToPlayer(Player player, String kitName) throws Exception {
+		Kit kit = getKitByName(kitName);
+		for (kEntry e : (kEntry[])entr.toArray()) {
+			if(e.usedBy() == player.getUniqueId() && e.kit() == kit) throw new PlayerOnKitCooldownException();
+		}
+
+		kit.getItems().forEach((item) -> {
+			player.getInventory().addItem(item);
+		});
+
+		if(!plugin.hasPermission(player, BYPASS_PERMISSION)) {
+			iTask task = new iTask();
+
+			kEntry entry = new kEntry(player.getUniqueId(), kit, task);
+
+			task.entry = entry;
+
+			entr.add(entry);
+			task.runTaskLater(plugin, kit.cooldownInTicks);
+		}
+
 	}
 
 	public void loadKit(String kitName) throws Exception {
