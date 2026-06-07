@@ -41,7 +41,11 @@ public enum ConfigManager {
 	command_kit_cooldown("message.commands.kit.on_cooldown", ConfigFile.Message),
 	settings_respawn_at_spawn("respawn-players-without-bed-at-spawn", ConfigFile.Config),
 	command_setspawn_set("message.commands.spawn.setspawn", ConfigFile.Message),
-	spawnpoint("spawn_info", ConfigFile.Config);
+	spawnpoint("spawn_info", ConfigFile.Config),
+	settings_tp_time("teleport_time", ConfigFile.Config),
+	teleportation_already_req("message.teleportation_already_req", ConfigFile.Message),
+	teleportation_await_tp("message.teleportation_await_tp", ConfigFile.Message),
+	teleportation_move("message.teleportation_move", ConfigFile.Message);
 
 	private enum ConfigFile {
 		Message("message.yml"),

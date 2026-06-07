@@ -23,6 +23,7 @@ import me.f4stbutterfly.tools.Commands.BasicCommands.KillCommand;
 import me.f4stbutterfly.tools.Commands.BasicCommands.KitCommand;
 import me.f4stbutterfly.tools.Commands.BasicCommands.RepairCommand;
 import me.f4stbutterfly.tools.Commands.BasicCommands.SetspawnCommand;
+import me.f4stbutterfly.tools.Commands.BasicCommands.SpawnCommmand;
 import me.f4stbutterfly.tools.Commands.Core.SmartCommand;
 import me.f4stbutterfly.tools.Commands.TabAutocomplete.SmartCommandTabAutocomplete;
 import me.f4stbutterfly.tools.Commands.TabAutocomplete.ToolsKitCompleter;
@@ -47,7 +48,8 @@ public class ToolsPlugin extends JavaPlugin implements IPermission {
 		new RepairCommand(this),
 		new ClearCommand(this),
 		new KitCommand(this),
-		new SetspawnCommand(this) };
+		new SetspawnCommand(this),
+		new SpawnCommmand(this) };
 
 	public static final String VERSION = "1.2";
 

@@ -11,6 +11,9 @@ message:
   player_joined: '%prefix% &e&l%target% &ahas joined the game!'
   player_quit: '%prefix% &e&l%target% &chas left the game!'
   invalid_kit: '%prefix% &cInvalid kit provided!'
+  teleportation_already_req: "%prefix% &cYou can't request another teleportation while current isn't finished"
+  teleportation_await_tp: "%prefix% &aPlease wait &e&l%t%s &abefore teleportation. Do not move"
+  teleportation_move: '%prefix% &cTeleportation canceled due to movement'
   commands:
     gamemode: "%prefix% &aYou changed &e&l%target% &agame mode to: &e&l%gamemode%"
     god: "%prefix% &aYou changed &e&l%target% &agod mode to: &e&l%mode%"

@@ -6,3 +6,6 @@ spawn_info:
   x: 0.0
   y: 0.0
   z: 0.0
+
+# Teleportation time in secs
+teleport_time: 5
