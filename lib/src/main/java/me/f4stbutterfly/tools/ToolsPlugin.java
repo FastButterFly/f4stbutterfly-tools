@@ -22,6 +22,7 @@ import me.f4stbutterfly.tools.Commands.BasicCommands.InvseeCommand;
 import me.f4stbutterfly.tools.Commands.BasicCommands.KillCommand;
 import me.f4stbutterfly.tools.Commands.BasicCommands.KitCommand;
 import me.f4stbutterfly.tools.Commands.BasicCommands.RepairCommand;
+import me.f4stbutterfly.tools.Commands.BasicCommands.SetspawnCommand;
 import me.f4stbutterfly.tools.Commands.Core.SmartCommand;
 import me.f4stbutterfly.tools.Commands.TabAutocomplete.SmartCommandTabAutocomplete;
 import me.f4stbutterfly.tools.Commands.TabAutocomplete.ToolsKitCompleter;
@@ -45,9 +46,10 @@ public class ToolsPlugin extends JavaPlugin implements IPermission {
 		new EnchantCommand(this),
 		new RepairCommand(this),
 		new ClearCommand(this),
-		new KitCommand(this) };
+		new KitCommand(this),
+		new SetspawnCommand(this) };
 
-	public static final String VERSION = "1.1";
+	public static final String VERSION = "1.2";
 
 	@Override
 	public boolean hasPermission(CommandSender sender, Permission perm) {
@@ -91,6 +93,9 @@ public class ToolsPlugin extends JavaPlugin implements IPermission {
 			getCommand(commands[i].getCommandName()).setTabCompleter(new SmartCommandTabAutocomplete(commands[i]));
 
 		}
+		SpawnManager.INSTANCE.plg = this;
+		SpawnManager.INSTANCE.spawnpoint = ConfigManager.spawnpoint.getAsLocation(this);
+		getLogger().info(SpawnManager.INSTANCE.spawnpoint.toString());
 	}
 
 	@Override

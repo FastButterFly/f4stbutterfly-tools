@@ -1,0 +1,32 @@
+message:
+  prefix: '&7[ &e&lPREFIX &7]&f'
+  no_permission: "%prefix% &cYou don't have required permission to do that! &7( &c%permission% &7)"
+  command_only_for_players: 'This command can only be used by player!'
+  proper_usage: '%prefix% &cProper usage: /%command% %args%'
+  invalid_player: '%prefix% &cInvalid player provided!'
+  invalid_gamemode: '%prefix% &cInvalid gamemode provided!'
+  invalid_material: '%prefix% &cInvalid material provided!'
+  invalid_nan: '%prefix% &cProvided value is not a number!'
+  invalid_enchantment: '%prefix% &cInvalid enchantment provided!'
+  player_joined: '%prefix% &e&l%target% &ahas joined the game!'
+  player_quit: '%prefix% &e&l%target% &chas left the game!'
+  invalid_kit: '%prefix% &cInvalid kit provided!'
+  commands:
+    gamemode: "%prefix% &aYou changed &e&l%target% &agame mode to: &e&l%gamemode%"
+    god: "%prefix% &aYou changed &e&l%target% &agod mode to: &e&l%mode%"
+    heal: "%prefix% &aYou healed &e&l%target%"
+    feed: "%prefix% &aYou fed &e&l%target%"
+    fly: "%prefix% &aYou changed &e&l%target% &afly mode to: &e&l%mode%"
+    kill: "%prefix% &aKilled &e&l%target%"
+    helpop:
+      sent: "%prefix% &c&l[HELPOP] &aMessage sent"
+      recived: "%prefix% &c&l[HELPOP] &e%sender% &asent: %message%"
+    give: '%prefix% &aYou gave &e&l%target% &ea &8&l( &ex%amount% &8&l)&e %item%'
+    enchant: '%prefix% &aYou enchanted item held in main hand by &e&l%target% &awith &8&l( &ex%level% &8&l)&e %enchantment%'
+    repaired: '%prefix% &aItem in your hand was repaired'
+    clear: '%prefix% &aYou cleared &e&l%target% &ainventory'
+    kit:
+      recived: '%prefix% &aYou received &e&l%kit% &akit'
+      on_cooldown: '%prefix% &cYou are still on cooldown for &e&l%kit% &akit'
+    spawn:
+      setspawn: '%prefix% &aSpawnpoint set'

@@ -1,5 +1,5 @@
 name: 'f4stbutterfly-tools'
-version: '1.1'
+version: '1.2'
 author: 'f4stbutterfly'
 main: 'me.f4stbutterfly.tools.ToolsPlugin'
 api-version: '1.16'
@@ -32,3 +32,6 @@ commands:
     aliases: [ eclear ]
   kit:
     aliases: [ ekit ]
+  setspawn:
+  spawn:
+    aliases: [ espawn ]
